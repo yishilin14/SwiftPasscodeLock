@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
-        passcodeLockPresenter.present()
+        passcodeLockPresenter.present(windowLevel: UIApplication.shared.windows.last?.windowLevel)
         
         return true
     }
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        passcodeLockPresenter.present()
+        passcodeLockPresenter.present(windowLevel: UIApplication.shared.windows.last?.windowLevel)
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {

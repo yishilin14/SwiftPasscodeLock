@@ -33,7 +33,7 @@ open class PasscodeLockPresenter {
         self.init(mainWindow: window, configuration: configuration, viewController: passcodeLockVC)
     }
     
-    open func present() {
+    open func present(windowLevel: CGFloat?) {
         
         guard passcodeConfiguration.repository.hasPasscode else { return }
         guard !isPasscodePresented else { return }
@@ -41,7 +41,7 @@ open class PasscodeLockPresenter {
         isPasscodePresented = true
 
         mainWindow?.endEditing(true)
-        moveWindowsToFront()
+        moveWindowsToFront(windowLevel: windowLevel)
         passcodeLockWindow.isHidden = false
 
         let userDismissCompletionCallback = passcodeLockVC.dismissCompletionCallback
@@ -91,8 +91,8 @@ open class PasscodeLockPresenter {
         )
     }
 
-    fileprivate func moveWindowsToFront() {
-        let windowLevel = UIApplication.shared.windows.last?.windowLevel ?? UIWindowLevelNormal
+    fileprivate func moveWindowsToFront(windowLevel: CGFloat?) {
+        let windowLevel = windowLevel ?? UIWindowLevelNormal
         let maxWinLevel = max(windowLevel, UIWindowLevelNormal)
         passcodeLockWindow.windowLevel =  maxWinLevel + 1
     }
